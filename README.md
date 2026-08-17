@@ -1,6 +1,6 @@
 # SingleInstanceGuard
 
-[English](README.md) | [中文](README-Zh.md) | [Example Code](example/main.cpp) | [License](LICENSE)
+[English](README.md) | [中文](README.zh-CN.md) | [Example Code](example/main.cpp) | [License](LICENSE)
 
 A small cross-platform C++17 library for ensuring that only one instance of an application is running at a time.
 

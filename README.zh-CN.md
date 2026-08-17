@@ -1,6 +1,6 @@
 # SingleInstanceGuard
 
-[English](README.md) | [中文](README-Zh.md) | [示例代码](example/main.cpp) | [许可证](LICENSE)
+[English](README.md) | [中文](README.zh-CN.md) | [示例代码](example/main.cpp) | [许可证](LICENSE)
 
 ## 简介
 
