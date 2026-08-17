@@ -38,7 +38,6 @@ int main()
   if (!guard)
   {
     std::cout << "Another instance is already running." << std::endl;
-
     return 1;
   }
 
