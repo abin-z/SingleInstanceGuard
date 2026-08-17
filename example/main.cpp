@@ -30,6 +30,11 @@ int main()
 
   abin::SingleInstanceGuard guard("test_application");
 
+  if (!guard.acquired())
+  {
+    std::cout << "Instance acquired failed." << std::endl;
+  }
+
   if (!guard)
   {
     std::cout << "Another instance is already running." << std::endl;
