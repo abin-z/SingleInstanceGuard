@@ -58,19 +58,12 @@ class SingleInstanceGuard::Impl {
 
     DWORD error = GetLastError();
 
-    if (error == ERROR_ALREADY_EXISTS)
-    {
-      acquired_ = false;
-    }
-    else
-    {
-      acquired_ = true;
-    }
+    acquired_ = error != ERROR_ALREADY_EXISTS;
   }
 
   ~Impl()
   {
-    if (handle_)
+    if (handle_ != nullptr)
     {
       if (acquired_)
       {
