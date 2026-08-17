@@ -27,7 +27,7 @@ Checks: >-
   -readability-redundant-access-specifiers
 
 WarningsAsErrors: ''
-HeaderFilterRegex: '.*[\\/]inifile\.h$'
+HeaderFilterRegex: '.*[\\/](include|src)[\\/].*'
 FormatStyle:     file
 
 CheckOptions:    
