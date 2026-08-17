@@ -9,12 +9,23 @@ namespace
 bool ensure_directory(const std::string &path)
 {
   namespace fs = std::filesystem;
+
   std::error_code ec;
-  if (fs::exists(path, ec))
+
+  if (fs::is_directory(path, ec))
   {
-    return fs::is_directory(path, ec);
+    return true;
   }
-  return fs::create_directories(path, ec);
+
+  ec.clear();
+  fs::create_directories(path, ec);
+
+  if (!ec)
+  {
+    return true;
+  }
+
+  return fs::is_directory(path, ec);
 }
 
 std::string make_lock_id(const std::string &name)
@@ -48,6 +59,7 @@ class SingleInstanceGuard::Impl {
   {
     std::string mutex_name = "Global\\abin_single_instance_" + make_lock_id(name);
 
+    SetLastError(ERROR_SUCCESS);
     handle_ = CreateMutexA(nullptr, TRUE, mutex_name.c_str());
 
     if (handle_ == nullptr)
@@ -56,7 +68,7 @@ class SingleInstanceGuard::Impl {
       return;
     }
 
-    DWORD error = GetLastError();
+    const DWORD error = GetLastError();
 
     acquired_ = error != ERROR_ALREADY_EXISTS;
   }
