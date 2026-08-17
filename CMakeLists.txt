@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15...3.31)
-project(SingleInstanceGuard    
+project(single_instance_guard    
     VERSION 1.0.0
     LANGUAGES CXX)
 
