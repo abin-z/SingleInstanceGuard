@@ -1,8 +1,12 @@
 /**
  * @file single_instance_guard.h
- *
  * @brief Provides a cross-platform single-instance guard.
+ * @author abin
+ * @date 2026-08-15
  */
+
+#ifndef __GUARD_SINGLE_INSTANCE_GUARD_H_INCLUDE_GUARD__
+#define __GUARD_SINGLE_INSTANCE_GUARD_H_INCLUDE_GUARD__
 #pragma once
 
 #include <memory>
@@ -57,3 +61,5 @@ class SingleInstanceGuard {
 };
 
 }  // namespace abin
+
+#endif  // __GUARD_SINGLE_INSTANCE_GUARD_H_INCLUDE_GUARD__
