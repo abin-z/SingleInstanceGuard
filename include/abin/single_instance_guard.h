@@ -19,15 +19,14 @@ namespace abin
  * @brief RAII guard that prevents multiple instances of the same application
  *        from running simultaneously.
  *
- * The guard acquires an exclusive named process lock when created.
- * If another instance with the same name is already running,
- * the lock acquisition fails.
+ * The guard acquires an exclusive named process lock when constructed.
+ * If another instance with the same name is already running, lock acquisition
+ * fails.
  *
- * The lock is automatically released when the object is destroyed
- * or when the process exits.
+ * The lock is automatically released when the guard is destroyed.
  *
  * Platform implementation:
- * - Linux/macOS: flock based file lock
+ * - Linux/macOS: file lock based on flock
  * - Windows: named mutex
  */
 class SingleInstanceGuard {
@@ -39,8 +38,17 @@ class SingleInstanceGuard {
    */
   explicit SingleInstanceGuard(const std::string &name);
 
+  /**
+   * @brief Release the acquired lock.
+   */
   ~SingleInstanceGuard();
 
+  /**
+   * @brief Check whether the guard successfully acquired the lock.
+   *
+   * @return true if the lock was acquired.
+   * @return false if another instance is already running.
+   */
   explicit operator bool() const noexcept;
 
   /**
@@ -52,7 +60,19 @@ class SingleInstanceGuard {
 
   SingleInstanceGuard(const SingleInstanceGuard &) = delete;
   SingleInstanceGuard &operator=(const SingleInstanceGuard &) = delete;
+  /**
+   * @brief Move-construct a single instance guard.
+   *
+   * @param other Guard to move from.
+   */
   SingleInstanceGuard(SingleInstanceGuard &&other) noexcept;
+  /**
+   * @brief Move-assign a single instance guard.
+   *
+   * @param other Guard to move from.
+   *
+   * @return Reference to this guard.
+   */
   SingleInstanceGuard &operator=(SingleInstanceGuard &&other) noexcept;
 
  private:
