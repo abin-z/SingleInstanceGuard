@@ -81,3 +81,6 @@ rules.ninja
 .cache
 # 生成的编译命令文件
 compile_commands.json
+
+# Doxygen 生成的文档
+docs/html/
